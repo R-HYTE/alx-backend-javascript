@@ -5,7 +5,7 @@ const fs = require('fs');
 function readCSVFile(databaseFile, callback) {
   fs.readFile(databaseFile, 'utf8', (err, data) => {
     if (err) {
-      callback(err, null);
+      callback(new Error('Cannot load the database'), null);
       return;
     }
 
@@ -56,7 +56,7 @@ const app = http.createServer((req, res) => {
     readCSVFile(databaseFile, (err, students) => {
       if (err) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end(`Internal Server Error: ${err.message}\n`);
+        res.end(`This is the list of our students\nCannot load the database`);
         return;
       }
 
