@@ -56,7 +56,7 @@ const app = http.createServer((req, res) => {
     readCSVFile(databaseFile, (err, students) => {
       if (err) {
         res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.end(`This is the list of our students\nCannot load the database`);
+        res.end('This is the list of our students\nCannot load the database');
         return;
       }
 
