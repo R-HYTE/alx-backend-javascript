@@ -15,10 +15,37 @@ export interface printTeacherFunction {
     (firstName: string, lastName: string): string;
 }
 
-// Implement the function
-const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
-    return `${firstName[0]}. ${lastName}`;
-};
+// Define the interface for the StudentClass constructor
+interface StudentClassConstructor {
+    new (firstName: string, lastName: string): StudentClass;
+}
+
+// Define the interface for the StudentClass
+interface StudentClass {
+    workOnHomework(): string;
+    displayName(): string;
+}
+
+// Implement the StudentClass
+class Student implements StudentClass {
+    private firstName: string;
+    private lastName: string;
+
+    constructor(firstName: string, lastName: string) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    workOnHomework(): string {
+        return 'Currently working';
+    }
+
+    displayName(): string {
+        return this.firstName;
+    }
+}
 
 // Example usage
-console.log(printTeacher("John", "Doe")); // Output: J. Doe
+const student = new Student('John', 'Doe');
+console.log(student.workOnHomework()); // Output: Currently working
+console.log(student.displayName());    // Output: John
