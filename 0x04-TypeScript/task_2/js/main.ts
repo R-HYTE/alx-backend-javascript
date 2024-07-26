@@ -1,16 +1,16 @@
-interface DirectorInterface {
+export interface DirectorInterface {
     workFromHome(): string;
     getCoffeeBreak(): string;
     workDirectorTasks(): string;
 }
 
-interface TeacherInterface {
+export interface TeacherInterface {
     workFromHome(): string;
     getCoffeeBreak(): string;
     workTeacherTasks(): string;
 }
 
-class Director implements DirectorInterface {
+export class Director implements DirectorInterface {
     workFromHome(): string {
         return 'Working from home';
     }
@@ -24,7 +24,7 @@ class Director implements DirectorInterface {
     }
 }
 
-class Teacher implements TeacherInterface {
+export class Teacher implements TeacherInterface {
     workFromHome(): string {
         return 'Cannot work from home';
     }
@@ -39,7 +39,7 @@ class Teacher implements TeacherInterface {
 }
 
 // Create the createEmployee function
-function createEmployee(salary: number | string): Director | Teacher {
+export function createEmployee(salary: number | string): Director | Teacher {
     if (typeof salary === 'number') {
         return salary < 500 ? new Teacher() : new Director();
     } else {
@@ -48,12 +48,12 @@ function createEmployee(salary: number | string): Director | Teacher {
 }
 
 // Define the isDirector type predicate
-function isDirector(employee: Director | Teacher): employee is Director {
+export function isDirector(employee: Director | Teacher): employee is Director {
     return (employee as Director).workDirectorTasks !== undefined;
 }
 
 // Define the executeWork function
-function executeWork(employee: Director | Teacher): void {
+export function executeWork(employee: Director | Teacher): void {
     if (isDirector(employee)) {
         console.log(employee.workDirectorTasks());
     } else {
@@ -61,6 +61,20 @@ function executeWork(employee: Director | Teacher): void {
     }
 }
 
+// String literal type for Subjects
+export type Subjects = 'Math' | 'History';
+
+// Define the teachClass function
+export function teachClass(todayClass: Subjects): string {
+    if (todayClass === 'Math') {
+        return 'Teaching Math';
+    } else {
+        return 'Teaching History';
+    }
+}
+
 // Example usage
-executeWork(createEmployee(200));    // Output: Getting to work
-executeWork(createEmployee(1000));   // Output: Getting to director tasks
+// console.log(teachClass('Math'));      // Output: Teaching Math
+// console.log(teachClass('History'));   // Output: Teaching History
+// executeWork(createEmployee(200));    // Output: Getting to work
+// executeWork(createEmployee(1000));   // Output: Getting to director tasks
