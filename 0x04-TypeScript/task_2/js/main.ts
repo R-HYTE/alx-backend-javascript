@@ -1,18 +1,15 @@
-// Define the DirectorInterface
 interface DirectorInterface {
     workFromHome(): string;
     getCoffeeBreak(): string;
     workDirectorTasks(): string;
 }
 
-// Define the TeacherInterface
 interface TeacherInterface {
     workFromHome(): string;
     getCoffeeBreak(): string;
     workTeacherTasks(): string;
 }
 
-// Implement the Director class
 class Director implements DirectorInterface {
     workFromHome(): string {
         return 'Working from home';
@@ -27,7 +24,6 @@ class Director implements DirectorInterface {
     }
 }
 
-// Implement the Teacher class
 class Teacher implements TeacherInterface {
     workFromHome(): string {
         return 'Cannot work from home';
@@ -51,7 +47,20 @@ function createEmployee(salary: number | string): Director | Teacher {
     }
 }
 
+// Define the isDirector type predicate
+function isDirector(employee: Director | Teacher): employee is Director {
+    return (employee as Director).workDirectorTasks !== undefined;
+}
+
+// Define the executeWork function
+function executeWork(employee: Director | Teacher): void {
+    if (isDirector(employee)) {
+        console.log(employee.workDirectorTasks());
+    } else {
+        console.log(employee.workTeacherTasks());
+    }
+}
+
 // Example usage
-console.log(createEmployee(200));    // Output: Teacher
-console.log(createEmployee(1000));   // Output: Director
-console.log(createEmployee('$500')); // Output: Director
+executeWork(createEmployee(200));    // Output: Getting to work
+executeWork(createEmployee(1000));   // Output: Getting to director tasks
