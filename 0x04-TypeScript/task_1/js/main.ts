@@ -1,27 +1,31 @@
-interface Teacher {
+export interface Teacher {
     readonly firstName: string;
     readonly lastName: string;
     fullTimeEmployee: boolean;
     yearsOfExperience?: number;
     location: string;
-    [key: string]: any;
+    [propName: string]: any; // This allows any additional properties to be added
 }
 
-// Create a Teacher object
-const teacher3: Teacher = {
+// Define the 'Directors' Interface extending 'Teacher'
+export interface Directors extends Teacher {
+    numberOfReports: number;
+}
+
+const director1: Directors = {
     firstName: 'John',
     lastName: 'Doe',
-    fullTimeEmployee: false,
     location: 'London',
-    contract: false,
+    fullTimeEmployee: true,
+    numberOfReports: 17
 };
 
-console.log(teacher3);
+console.log(director1);
 
-// In console should print
+// should print
 // Object
-// contract: false
 // firstName: "John"
-// fullTimeEmployee: false
+// fullTimeEmployee: true
 // lastName: "Doe"
 // location: "London"
+// numberOfReports: 17
