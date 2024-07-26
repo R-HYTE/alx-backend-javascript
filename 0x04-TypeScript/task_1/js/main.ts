@@ -4,28 +4,21 @@ export interface Teacher {
     fullTimeEmployee: boolean;
     yearsOfExperience?: number;
     location: string;
-    [propName: string]: any; // This allows any additional properties to be added
+    [propName: string]: any;
 }
 
-// Define the 'Directors' Interface extending 'Teacher'
 export interface Directors extends Teacher {
     numberOfReports: number;
 }
 
-const director1: Directors = {
-    firstName: 'John',
-    lastName: 'Doe',
-    location: 'London',
-    fullTimeEmployee: true,
-    numberOfReports: 17
+export interface printTeacherFunction {
+    (firstName: string, lastName: string): string;
+}
+
+// Implement the function
+const printTeacher: printTeacherFunction = (firstName: string, lastName: string): string => {
+    return `${firstName[0]}. ${lastName}`;
 };
 
-console.log(director1);
-
-// should print
-// Object
-// firstName: "John"
-// fullTimeEmployee: true
-// lastName: "Doe"
-// location: "London"
-// numberOfReports: 17
+// Example usage
+console.log(printTeacher("John", "Doe")); // Output: J. Doe
